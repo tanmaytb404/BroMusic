@@ -68,6 +68,11 @@
         margin: 1px;
       }
 
+      .latest-release .description{
+        line-height: 0.5vh;
+        margin-top: 0;
+      }
+
       .cards{
         display: flex;
         flex-wrap: wrap;
@@ -184,6 +189,10 @@
         margin: 1px;
       }
 
+      .latest-release .description{
+        line-height: 0.5vh;
+        margin-top: 0;
+      }
       .cards{
         display: flex;
         flex-wrap: wrap;
@@ -364,6 +373,11 @@
       margin: 1px;
     }
 
+    .latest-release .description{
+      line-height: 0.5vh;
+      margin-top: 0;
+    }
+
     .cards{
       display: flex;
       flex-wrap: wrap;
@@ -513,7 +527,10 @@ top: 35%;
     display: block;
     color: antiquewhite;
   }
-  
+  .latest-release .description{
+    line-height: 0.5vh;
+    margin-top: 0;
+  }
   .song-details h3,
   .song-details p {
     margin: 0;

@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>Custom Slider</title>
+    <link rel="stylesheet" href="cc.css" />
+    <script
+      src="https://kit.fontawesome.com/a1d961dc77.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="myCarousel" class="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="static/eminembanner.jpg" alt="First slide" />
+        </div>
+        <div class="carousel-item">
+          <img src="static/paponbanner.png" alt="Second slide" />
+        </div>
+        <div class="carousel-item">
+          <img src="static/adelebanner.jpg" alt="Third slide" />
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#"
+        role="button"
+        onclick="prevSlide()"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#"
+        role="button"
+        onclick="nextSlide()"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let slides = document.querySelectorAll(".carousel-item");
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 4000); // Change image every 2 seconds
+      }
+
+      function nextSlide() {
+        slideIndex++;
+        showSlides();
+      }
+
+      function prevSlide() {
+        slideIndex--;
+        showSlides();
+      }
+    </script>
+  </body>
+</html>

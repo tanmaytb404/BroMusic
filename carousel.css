@@ -115,3 +115,62 @@
     z-index: 9999;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), -1px 0px 2px rgba(255, 255, 255, 0);
 }
+
+.carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap; /* Prevents items from wrapping */
+}
+
+.carousel-item {
+    position: relative;
+    display: inline-block; /* Display items in a row */
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+    vertical-align: top; /* Align items to the top */
+}
+
+/* Adjust the width of the carousel to fit all items */
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Animate the opacity of the visible item */
+.carousel-open:checked + .carousel-item {
+    opacity: 1;
+}
+
+/* Animate the transition between items */
+.carousel-inner {
+    transition: transform 0.5s ease;
+}
+
+.carousel-open:checked + .carousel-item:nth-child(1) ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+.carousel-open:checked + .carousel-item:nth-child(2) ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+.carousel-open:checked + .carousel-item:nth-child(3) ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+    color: #428bca; /* Active indicator color */
+}
+
+/* Slide animation for the carousel */
+.carousel-open:checked + .carousel-item:nth-child(1) ~ .carousel-control .prev,
+.carousel-open:checked + .carousel-item:nth-child(2) ~ .carousel-control .next,
+.carousel-open:checked + .carousel-item:nth-child(2) ~ .carousel-control .prev,
+.carousel-open:checked + .carousel-item:nth-child(3) ~ .carousel-control .next,
+.carousel-open:checked + .carousel-item:nth-child(3) ~ .carousel-control .prev,
+.carousel-open:checked + .carousel-item:nth-child(1) ~ .carousel-control .next {
+    display: block; /* Show navigation controls */
+}
+
+.carousel-open:checked + .carousel-item:nth-child(1) ~ .carousel-item {
+    transform: translateX(0); /* Slide to the first item */
+}
+
+.carousel-open:checked + .carousel-item:nth-child(2) ~ .carousel-item {
+    transform: translateX(-100%); /* Slide to the second item */
+}
+
+.carousel-open:checked + .carousel-item:nth-child(3) ~ .carousel-item {
+    transform: translateX(-200%); /* Slide to the third item */
+}

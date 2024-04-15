@@ -1,91 +1,204 @@
-.latest-release {
-    margin-top: 20px;
-  }
-  .latest-release .heading{
-    color: antiquewhite;
-    margin: auto;
+.display-artist{
+  width: 100%;
+  display: flex;
+  /* border: 1px solid greenyellow; */
+  background-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
-.cards {
-    display: flex;
-    /* justify-content: space-between; */
-  }
-  .card {
-    width: 25%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block; 
-    vertical-align: top;
-    margin:2%
-  }
 
-  .latest-release .card:not(:last-child) {
-    margin-right: 2%;
-  }
+.artist-image{
+  /* border: 1px solid yellow; */
+  width: 40%;
+  height: auto;
   
-  .card img {
-    width: 100%;
-    height: auto;
-  }
-  
+}
+.artist-image img{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: #222 0px 8px 24px;
+}
 
-  .description {
-    padding: 10px;
-    text-align: center;
-    color: antiquewhite;
-  }
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    right:0;
-    width: 100%;
-    height: 100%;
-    display: none;
-  }
-  
-  .overlay button {
-    background-color: transparent;
-    border: none;
-    font-size: 4em;
-    position: absolute;
-    bottom: 0px; /* Position the button at the bottom */
-    right: 0px; /* Position the button at the right */
-    left: 60%;
-    top: 35%;
-  }
+.artist-details{
+  display: block;
+  color: antiquewhite;
+  width: 60%;
 
-  .overlay button i{
-    color: #00B4CC;
-  }
-  .card:hover .overlay {
-    display: block;
-  }
-  .card {
-    position: relative;
-  }
-  
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Adjust the gradient colors and opacity as needed */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s ease; /* Smooth transition effect */
-  }
-  
-  .card:hover::before {
-    opacity: 1; /* Show the overlay on hover */
-  }
-  
-  .latest-release img {
-    width: 100%; /* Set a fixed width */
-    height: 80%; /* Set a fixed height */
-    object-fit: cover;
-    /* mix-blend-mode: exclusion; */
-  }
-  
+}
+
+.artist-name{
+  display: flex;
+  justify-content: space-between;
+margin: 8%;
+line-height: 3.5vh;
+}
+
+.artist-bio{
+  margin-top: -10%;
+  margin-left: 8%;
+}
+
+.artist-bio p,h3{
+  text-align: left;
+}
+
+.activity{
+  display: flex;
+  justify-content: space-between;
+  margin:8%;
+}
+
+.right-content {
+  display: grid;
+  grid-template-rows: 60% 40%;
+  border-radius: 0 15px 15px 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 30px 20px;
+  color: #e5e5e5;
+}
+
+.song-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* SONGS */
+
+.recommended-songs h1 {
+  margin-bottom: 24px;
+}
+
+.song-container {
+  align-items: left;
+}
+
+.song-container .song {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  margin-bottom: 16px;
+}
+
+.song-title{
+  text-align: center;
+}
+
+.song-activity{
+  font-size: 4em;
+  margin-left: 4em;
+}
+
+.song-img {
+  position: relative;
+  width: 60px;
+  border-radius: 6px;
+}
+
+.song-img img {
+  aspect-ratio: 3/2;
+  border-radius: inherit;
+  object-fit: cover;
+  border: 2px solid rgba(159, 160, 168, 0.5);
+  box-shadow: rgba(221, 221, 221, 0.3) 0px 6px 18px -3px,
+    rgba(221, 221, 221, 0.2) 0px -3px 0px inset;
+}
+
+.song-img .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  width: 90%;
+  height: 92%;
+  background-color: #00B4CC;
+  border-radius: inherit;
+  font-size: 1.75rem;
+  opacity: 0;
+  transition: all 0.4s linear;
+  cursor: pointer;
+}
+
+.song-img:hover .overlay {
+  opacity: 1;
+}
+
+.song h2 {
+  font-size: 1rem;
+}
+
+.song p,
+.song span {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.song p {
+  opacity: 0.8;
+}
+
+.back i{
+  font-size: 3em;
+  position: absolute;
+  left: 80px;
+  margin-top: 2.5px;
+  color: #00B4CC;
+}
+.activity{
+  font-family: 'Ubuntu', sans-serif;
+}
+.activity .play{
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 1vw;
+  line-height: 1;
+  border-radius: 50vw;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  max-width: 80vw;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 14px 18px;
+  color: antiquewhite;
+  box-shadow: inset 0 0 0 2px #616467;
+  background-color: transparent;
+  height: 48px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.play:hover{
+  color: #fff;
+  background-color: #616467;
+}
+
+.activity .follow{
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 1vw;
+  line-height: 1;
+  border-radius: 50vw;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  max-width: 80vw;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 14px 18px;
+  color: antiquewhite;
+  box-shadow: inset 0 0 0 2px #616467;
+  background-color: transparent;
+  height: 48px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.follow:hover{
+  color: #fff;
+  background-color: #616467;
+}
