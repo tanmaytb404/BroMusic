@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ericsson.ca</groupId>
+  <artifactId>entel_chile_eda1_ca</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>entel_chile_eda1</name>
+  <pluginRepositories>
+		<pluginRepository> 
+			<id>entel_chile_eda1_ca</id>
+			<name>entel_chile_eda1_ca</name>
+			<url>https://artifactory.rosetta.ericssondevops.com/artifactory/sdu-in-ac-eda-virtual/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>amx_dr_eda_upgrade</id>
+			<name>amx_dr_eda_upgrade</name>
+			<url>https://artifactory.rosetta.ericssondevops.com/artifactory/sdu-in-ac-eda-virtual/</url>
+		</repository>
+	</repositories>
+	<profiles>	
+		<profile>
+			<id>buildCAWizard</id>
+			<modules>
+				<module>Tools/CA-Wizard</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>sonarReport</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<properties>
+								<property>
+									<name>listener</name>
+									<value>org.sonar.java.jacoco.JUnitListener</value>
+								</property>
+							</properties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>	
+	</profiles>
+  <modules>
+	<module>CHILE B2B/Common/BroadWorks/JCA-BroadWorks</module>
+	<module>CHILE B2B/Common/BroadWorks/JDV-BroadWorks-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/BroadWorks/JDV-BroadWorks-Service-Provisioning</module>
+	<module>CHILE B2B/Common/HuaweiIMS/ATS/JCA-HuaweiATS</module>
+	<module>CHILE B2B/Common/HuaweiIMS/ATS/JDV-HuaweiATS-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/HuaweiIMS/ATS/JDV-HuaweiATS-Service-Provisioning</module>
+	<module>CHILE B2B/Common/HuaweiIMS/ENS/JCA-HuaweiENS</module>
+	<module>CHILE B2B/Common/HuaweiIMS/ENS/JDV-HuaweiENS-Resource-Provisioning</module> 
+	<module>CHILE B2B/Common/HuaweiIMS/ENS/JDV-HuaweiENS-Service-Provisioning</module> 
+	<module>CHILE B2B/Common/HuaweiIMS/HSS/JCA-HuaweiHSS</module>
+	<module>CHILE B2B/Common/HuaweiIMS/HSS/JDV-HuaweiHSS-Resource-Provisioning</module> 
+	<module>CHILE B2B/Common/HuaweiIMS/HSS/JDV-HuaweiHSS-Service-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVATS-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVATS-Service-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVENS-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVENS-Service-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVHSS-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/Virtual_IMS/JDV-HuaweiVHSS-Service-Provisioning</module>
+	<module>CHILE B2B/Common/Webex/JCA-Webex</module>
+	<module>CHILE B2B/Common/Webex/JDV-Webex-Resource-Provisioning</module>
+	<module>CHILE B2B/Common/Webex/JDV-Webex-Service-Provisioning</module>
+	<module>CHILE B2B/JDV-ENTELCHILEB2B-SV-Provisioning</module>
+	<module>CHILE B2B/JDV-EntelOne-SV-Provisioning</module>
+	<module>JDV-ENTELPeruPostPaid-SV-Provisioning</module>
+	<module>PERU B2B/JDV-SV-EntelPeruB2B-Provisioning</module>
+  </modules>
+<properties>
+		<common.components.version>4.277</common.components.version>
+		<api.pas.version>1.24.12</api.pas.version>
+		<utils.pas.version>1.12</utils.pas.version>
+		<javautils.version>3.4</javautils.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<additionalparam>-Xdoclint:none</additionalparam>
+		<nbia.version>4.273.7</nbia.version>
+	</properties>
+
+	<!-- ========================================== = The BUILD section ========================================== -->
+	<build>	
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xsl</include>
+					<include>**/*.xml</include>
+					<include>**/*.xsd</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>META-INF/**/*</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<encoding>ISO-8859-1</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<verify>true</verify>
+					<finalName>${project.name}</finalName>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifest>
+							<addDefaultImplementationEntries>
+								true
+							</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-rar-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<rarSourceDirectory>${basedir}/target/classes</rarSourceDirectory>
+					<finalName>${project.name}</finalName>
+				</configuration>
+			</plugin>
+				<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>     
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>target/jacoco.exec</dataFile>
+							<outputDirectory>target/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>      
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.14.1</version>			
+				<configuration>
+					<!--	<argLine>-XX:-UseSplitVerifier</argLine>	-->
+					<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>			
+			</plugin>
+
+
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<releaseProfiles />
+					<goals>dependency:resolve deploy</goals>
+					<arguments>-Dmaven.repo.local=repository ${arguments}</arguments>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.0.1</version>
+				<executions>
+					<execution>
+						<id>enforce-no-snapshots</id>
+						<phase>none</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireReleaseDeps>
+									<message>!! No SNAPSHOT VERSIONS are allowed when building a delivery !!</message>
+								</requireReleaseDeps>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+		</plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<useSystemClassLoader>false</useSystemClassLoader>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.7,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.ericsson.mvn</groupId>
+										<artifactId>tar-manifest-generator</artifactId>
+										<versionRange>[1.2,)</versionRange>
+										<goals>
+											<goal>build</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0,)</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.google.code.maven-replacer-plugin</groupId>
+										<artifactId>replacer</artifactId>
+										<versionRange>[1.5,)</versionRange>
+										<goals>
+											<goal>replace</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-help-plugin</artifactId>
+										<versionRange>[2.2,)</versionRange>
+										<goals>
+											<goal>effective-settings</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+				<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+			        <useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
+    			</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- ========================================== 
+	= The DEPENDENCIES section 
+	========================================== -->
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>bom</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>LIB-JDV-Public</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>dup-lib-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>Utils-PAS</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>API-PAS</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>JavaUtils</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.context</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson</groupId>
+			<artifactId>TEST-Common</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson.mpe</groupId>
+			<artifactId>mpe-services-nbi</artifactId>
+			<scope>provided</scope>
+			<version>${nbia.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson.mpe</groupId>
+			<artifactId>mpe-platform-proclog</artifactId>
+			<scope>provided</scope>
+			<version>${nbia.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson.mpe</groupId>
+			<artifactId>mpe-platform-common</artifactId>
+			<scope>provided</scope>
+			<version>${nbia.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson.mpe</groupId>
+			<artifactId>mpe-business-nbi-demoHSS</artifactId>
+			<scope>provided</scope>
+			<version>${nbia.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-jacoco-listeners</artifactId>
+			<version>3.8</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>org.jacoco.core</artifactId>
+			<version>0.7.9</version>
+		</dependency>
+	</dependencies>
+
+	<!-- ========================================== 
+	= The DEPENDENCY MANAGEMENT section 
+	========================================== -->
+
+	<dependencyManagement>
+		<dependencies>	
+			<dependency>
+				<groupId>org.eclipse</groupId>
+				<artifactId>help</artifactId>
+				<version>3.3.0-v20070524</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>bom</artifactId>
+				<type>pom</type>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.resource</groupId>
+				<artifactId>connector-api</artifactId>
+				<version>1.5</version>
+			</dependency>
+
+			<!-- Team Forge components -->
+			<!-- Next Gen. Connector FW -->
+			<dependency>
+				<groupId>com.ericsson.ema</groupId>
+				<artifactId>ema-connector-fw-interfaces</artifactId>
+				<version>1.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>LIB-JDV-Public</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>dup-lib-core</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>LIB-Cluster-Strategy</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>Utils-PAS</artifactId>
+				<version>${utils.pas.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>API-PAS</artifactId>
+				<version>${api.pas.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>DVE-Security</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>JavaUtils</artifactId>
+				<version>${javautils.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>org.springframework.core</artifactId>
+				<version>3.0.3.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>org.springframework.context</artifactId>
+				<version>3.0.3.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>1.9.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hamcrest</groupId>
+						<artifactId>hamcrest-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>1.9.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hamcrest</groupId>
+						<artifactId>hamcrest-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hamcrest</groupId>
+						<artifactId>hamcrest-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>TEST-Common</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson</groupId>
+				<artifactId>LIB-PAS</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson.mpe</groupId>
+				<artifactId>mpe-services-nbi</artifactId>
+				 <version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson.mpe</groupId>
+				<artifactId>mpe-platform-proclog</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson.mpe</groupId>
+				<artifactId>mpe-platform-common</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ericsson.mpe</groupId>
+				<artifactId>mpe-business-nbi-demoHSS</artifactId>
+				<version>${common.components.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>
+
